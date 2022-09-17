@@ -8,6 +8,8 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using static System.Net.Mime.MediaTypeNames;
+using Application = Microsoft.Office.Interop.OneNote.Application;
 
 namespace alxnbl.OneNoteMdExporter.Services.Export
 {
@@ -254,6 +256,46 @@ namespace alxnbl.OneNoteMdExporter.Services.Export
             pageMdFileContent = pageMdFileContentModified;
         }
 
+        public string Matchexp(Match match, Page page)
+        {
+
+            string imageTag = match.ToString();
+
+            // http://regexstorm.net/tester
+            string regexImgAttributes = "<img src=\"(?<src>[^\"]+)\".* />";
+
+            MatchCollection matchs = Regex.Matches(imageTag, regexImgAttributes, RegexOptions.IgnoreCase);
+            Match imgMatch = matchs[0];
+
+            var panDocHtmlImgTagPath = Path.GetFullPath(imgMatch.Groups["src"].Value);
+
+            Attachement imgAttach = page.ImageAttachements.Where(img => PathExtensions.PathEquals(img.ActualSourceFilePath, panDocHtmlImgTagPath)).FirstOrDefault();
+
+            // Only add a new attachment if this is the first time the image is referenced in the page
+            if (imgAttach == null)
+            {
+                // Add a new attachmeent to current page
+                imgAttach = new Attachement(page)
+                {
+                    Type = AttachementType.Image,
+                };
+
+                imgAttach.ActualSourceFilePath = Path.GetFullPath(panDocHtmlImgTagPath);
+                imgAttach.OriginalUserFilePath = Path.GetFullPath(panDocHtmlImgTagPath); // Not really a use file path but a PanDoc temp file
+
+                page.Attachements.Add(imgAttach);
+
+                //EnsureAttachmentFileIsNotUsed(page, imgAttach);
+            }
+
+            var attachRef = GetAttachmentMdReference(imgAttach);
+            var refLabel = Path.GetFileNameWithoutExtension(imgAttach.ActualSourceFilePath);
+            return $"![{refLabel}]({attachRef})";
+
+        }
+
+        public delegate string MatchEvaluator(Match match);
+        delegate string ReplaceDelegate(string input, string pattern, MatchEvaluator evaluator);
 
         /// <summary>
         /// Replace PanDoc IMG HTML tag by markdown reference and copy image file into notebook export directory
@@ -263,13 +305,13 @@ namespace alxnbl.OneNoteMdExporter.Services.Export
         /// <param name="resourceFolderPath">The path to the notebook folder where store attachments</param>
         public void ExtractImagesToResourceFolder(Page page, ref string mdFileContent)
         {
-            // Replace <IMG> tags by markdown references
+            var stophere = 0;            
             var pageTxtModified = Regex.Replace(mdFileContent, "<img [^>]+/>", delegate (Match match)
+
             {
 
                 string imageTag = match.ToString();
 
-                // http://regexstorm.net/tester
                 string regexImgAttributes = "<img src=\"(?<src>[^\"]+)\".* />";
 
                 MatchCollection matchs = Regex.Matches(imageTag, regexImgAttributes, RegexOptions.IgnoreCase);
@@ -298,7 +340,14 @@ namespace alxnbl.OneNoteMdExporter.Services.Export
 
                 var attachRef = GetAttachmentMdReference(imgAttach);
                 var refLabel = Path.GetFileNameWithoutExtension(imgAttach.ActualSourceFilePath);
-                return $"![{refLabel}]({attachRef})";
+
+
+                //![](assets/file.png)
+                //![](assets / Img % 20Test / image - 20220916180607723.png)
+
+                var resultTest = $"![]({attachRef})";
+                //var result = $"![{refLabel}]({attachRef})";
+                return resultTest;
 
             });
 
@@ -320,11 +369,6 @@ namespace alxnbl.OneNoteMdExporter.Services.Export
             }
         }
 
-        /// <summary>
-        /// Suffix the attachment file name if it conflicits with an other attachement previously attached to the notebook export
-        /// </summary>
-        /// <param name="page">The parent Page</param>
-        /// <param name="attach">The attachment</param>
         private void EnsureAttachmentFileIsNotUsed(Page page, Attachement attach)
         {
             var notUseFileNameFound = false;
@@ -352,11 +396,7 @@ namespace alxnbl.OneNoteMdExporter.Services.Export
         }
 
 
-        /// <summary>
         /// Suffix the page file name if it conflicits with an other page previously attached to the notebook export
-        /// </summary>
-        /// <param name="page">The parent Page</param>
-        /// <param name="attach">The attachment</param>
         private void EnsurePageUniquenessPerSection(Page page)
         {
             var notUseFileNameFound = false;

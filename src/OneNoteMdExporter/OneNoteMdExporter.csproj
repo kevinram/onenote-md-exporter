@@ -30,9 +30,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Infrastructure\AppSettings - Copy.txt" />
     <None Remove="Resources\trad.en.json" />
     <None Remove="Resources\trad.fr.json" />
     <None Remove="Resources\trad.zh.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Infrastructure\AppSettings - Copy.txt" />
   </ItemGroup>
 
   <ItemGroup>

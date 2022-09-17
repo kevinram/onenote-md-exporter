@@ -18,10 +18,18 @@ namespace alxnbl.OneNoteMdExporter.Services.Export
     {
         protected override string GetResourceFolderPath(Page page)
         {
+            var notebookPath = page.GetNotebook().ExportFolder;
+            var fldName = _appSettings.ResourceFolderName;
+            var pagePath = Path.GetDirectoryName(GetPageMdFilePath(page));
+            var resourceFolderName = _appSettings.ResourceFolderName;
+            var result = "";
+
             if (_appSettings.ResourceFolderLocation == ResourceFolderLocationEnum.RootFolder)
-                return Path.Combine(page.GetNotebook().ExportFolder, _appSettings.ResourceFolderName);
+                result = Path.Combine(notebookPath, fldName);
             else
-                return Path.Combine(Path.GetDirectoryName(GetPageMdFilePath(page)), _appSettings.ResourceFolderName);
+                result = Path.Combine(pagePath, resourceFolderName);
+
+            return result;
         } 
 
         protected override string GetPageMdFilePath(Page page)
@@ -55,8 +63,11 @@ namespace alxnbl.OneNoteMdExporter.Services.Export
 
         protected override string GetAttachmentFilePath(Attachement attachement)
         {
+            var resourcePath = GetResourceFolderPath(attachement.ParentPage);
+            var friendlyName = attachement.FriendlyFileName.RemoveMdReferenceInvalidChars();
+            var r = Path.Combine(resourcePath, friendlyName);
             if (attachement.OverrideExportFilePath == null)
-                return Path.Combine(GetResourceFolderPath(attachement.ParentPage), attachement.FriendlyFileName.RemoveMdReferenceInvalidChars());         
+                return r;
             else
                 return attachement.OverrideExportFilePath;
         }
