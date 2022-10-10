@@ -153,7 +153,7 @@ public class JoplinExportService : ExportServiceBase
         var data = new Dictionary<string, string>();
 
         data["id"] = attach.Id;
-        data["mime"] = MimeTypes.GetMimeType(exportFilePath);
+        //data["mime"] = MimeTypes.GetMimeType(exportFilePath);
         data["filename"] = attach.FriendlyFileName;
         data["updated_time"] = attach.ParentPage.LastModificationDate.ToString("s");
         data["user_updated_time"] = attach.ParentPage.LastModificationDate.ToString("s");
