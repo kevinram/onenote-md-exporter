@@ -5,15 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace a.onexport.Helpers
+namespace a.onexport.Helpers;
+
+public static class DirectoryHelper
 {
-    public static class DirectoryHelper
+    public static void ClearFolder(string exportFolder)
     {
-        public static void ClearFolder(string exportFolder)
-        {
-            if (Directory.Exists(exportFolder))
-                Directory.Delete(exportFolder, true);
-            Directory.CreateDirectory(exportFolder);
-        }
+        if (Directory.Exists(exportFolder))
+            Directory.Delete(exportFolder, true);
+        Directory.CreateDirectory(exportFolder);
     }
 }

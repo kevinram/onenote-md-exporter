@@ -1,16 +1,15 @@
 ﻿using System;
 using System.IO;
 
-namespace a.onexport.Helpers
+namespace a.onexport.Helpers;
+
+public static class PathExtensions
 {
-    public static class PathExtensions
+    public static bool PathEquals(string path1, string path2)
     {
-        public static bool PathEquals(string path1, string path2)
-        {
-            return String.Compare(
-                Path.GetFullPath(path1).TrimEnd('\\'),
-                Path.GetFullPath(path2).TrimEnd('\\'),
-                StringComparison.InvariantCultureIgnoreCase) == 0;
-        }
+        return String.Compare(
+            Path.GetFullPath(path1).TrimEnd('\\'),
+            Path.GetFullPath(path2).TrimEnd('\\'),
+            StringComparison.InvariantCultureIgnoreCase) == 0;
     }
 }
