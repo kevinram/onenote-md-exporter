@@ -3,7 +3,6 @@ using a.onexport.Infrastructure;
 using a.onexport.Models;
 using CommandLine;
 using OneNote = Microsoft.Office.Interop.OneNote;
-using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -103,15 +102,15 @@ public class Program
 
         foreach (Notebook notebook in notebookToProcess)
         {
-            Log.Information("\n***************************************");
-            Log.Information(Localizer.GetString("StartExportingNotebook"), notebook.Title);
-            Log.Information("***************************************");
+            //Log.Information("\n***************************************");
+            //Log.Information(Localizer.GetString("StartExportingNotebook"), notebook.Title);
+            //Log.Information("***************************************");
 
             exportService.ExportNotebook(notebook, opts.SectionName, opts.PageName);
 
-            Log.Information("");
-            Log.Information(Localizer.GetString("ExportSuccessful"), Path.GetFullPath(notebook.ExportFolder));
-            Log.Information("");
+            //Log.Information("");
+            //Log.Information(Localizer.GetString("ExportSuccessful"), Path.GetFullPath(notebook.ExportFolder));
+            //Log.Information("");
         }
 
         if (!opts.NoInput)
@@ -119,14 +118,14 @@ public class Program
             if (notebookToProcess.Count == 1)
                 Process.Start("explorer.exe", Path.GetFullPath(notebookToProcess.First().ExportFolder) + Path.DirectorySeparatorChar);
 
-            Log.Information(Localizer.GetString("EndOfExport"));
+            //Log.Information(Localizer.GetString("EndOfExport"));
             Console.ReadLine();
         }
     }
 
     private static void UpdateSettingsForm()
     {
-        Log.Information(Localizer.GetString("DoYouWantToUpdateSettings"));
+        //Log.Information(Localizer.GetString("DoYouWantToUpdateSettings"));
 
         var editSettings = Console.ReadLine();
 
@@ -144,16 +143,16 @@ public class Program
     {
         var assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
-        Log.Debug($"CurrentCulture : {CultureInfo.CurrentCulture}");
-        Log.Debug($"OneNoteMdExporter version {assemblyVersion}");
+        //Log.Debug($"CurrentCulture : {CultureInfo.CurrentCulture}");
+        //Log.Debug($"OneNoteMdExporter version {assemblyVersion}");
 
-        Log.Information("-----------------------");
-        Log.Information("- OneNote Md Exporter -");
-        Log.Information($"       v{assemblyVersion}");
-        Log.Information("-----------------------\n");
+        //Log.Information("-----------------------");
+        //Log.Information("- OneNote Md Exporter -");
+        //Log.Information($"       v{assemblyVersion}");
+        //Log.Information("-----------------------\n");
 
-        Log.Information(Localizer.GetString("WelcomeMessage"));
-        Log.Information(Localizer.GetString("PressEnter"));
+        //Log.Information(Localizer.GetString("WelcomeMessage"));
+        //Log.Information(Localizer.GetString("PressEnter"));
 
 
         if (!opts.NoInput)
@@ -164,23 +163,23 @@ public class Program
     {
         if (string.IsNullOrEmpty(optsExportFormat))
         {
-            Log.Information(Localizer.GetString("ChooseExportFormat"));
-            Log.Information(Localizer.GetString("ChooseExportFormat1"));
-            Log.Information(Localizer.GetString("ChooseExportFormat2"));
+            //Log.Information(Localizer.GetString("ChooseExportFormat"));
+            //Log.Information(Localizer.GetString("ChooseExportFormat1"));
+            //Log.Information(Localizer.GetString("ChooseExportFormat2"));
 
             optsExportFormat = Console.ReadLine();
 
-            Log.Information("");
+            //Log.Information("");
         }
 
 
         if (!Enum.TryParse<ExportFormat>(optsExportFormat, true, out var exportFormat))
         {
-            Log.Information(Localizer.GetString("BadInput"));
+            //Log.Information(Localizer.GetString("BadInput"));
             return ExportFormat.Undefined;
         }
 
-        Log.Debug($"Format choosen: {exportFormat}");
+        //Log.Debug($"Format choosen: {exportFormat}");
 
         return exportFormat;
     }
@@ -189,8 +188,9 @@ public class Program
     {
         var notebook = OneNoteApp.GetNotebooks().Where(n => n.Title == notebookName).ToList(); // can be optimized
 
-        if(notebook.Count == 0)
-            Log.Information(Localizer.GetString("NotebookNameNotFound"), notebookName);
+        if (notebook.Count == 0)
+            //Log.Information(Localizer.GetString("NotebookNameNotFound"), notebookName);
+            Debug.WriteLine("KRR - Notebook not found");
 
         return notebook;
     }
@@ -199,17 +199,17 @@ public class Program
     {
         var notebooks = OneNoteApp.GetNotebooks();
 
-        Log.Information("\n***************************************");
-        Log.Information(Localizer.GetString("NotebookFounds"), notebooks.Count);
-        Log.Information("***************************************\n");
+        //Log.Information("\n***************************************");
+        //Log.Information(Localizer.GetString("NotebookFounds"), notebooks.Count);
+        //Log.Information("***************************************\n");
 
-        Log.Information(Localizer.GetString("PleaseChooseNotebookToExport"));
+        //Log.Information(Localizer.GetString("PleaseChooseNotebookToExport"));
         
-        Log.Information(Localizer.GetString("ExportAllNotebooks"));
+        //Log.Information(Localizer.GetString("ExportAllNotebooks"));
 
         for (int i = 1; i <= notebooks.Count; i++)
         {
-            Log.Information(Localizer.GetString("ExportNotebookPositionX"), i, notebooks.ElementAt(i - 1).Title);
+            //Log.Information(Localizer.GetString("ExportNotebookPositionX"), i, notebooks.ElementAt(i - 1).Title);
         }
 
         var input = Console.ReadLine();
@@ -222,7 +222,8 @@ public class Program
             var notebooksResult = inputInt.Where(i => i <= notebooks.Count).Select(i => notebooks.ElementAt(i - 1)).ToList();
 
             if (!notebooksResult.Any())
-                Log.Information(Localizer.GetString("NotebookNotFound"));
+                //Log.Information(Localizer.GetString("NotebookNotFound"));
+                Debug.WriteLine("KRR - Notebook not found");
 
             return notebooksResult;
         }

@@ -57,7 +57,7 @@ public class JoplinExportService : ExportServiceBase
         // Get all sections and section groups, or the one specified in parameter if any
         var sections = notebook.GetSections(true).Where(s => string.IsNullOrEmpty(sectionNameFilter) || s.Title == sectionNameFilter).ToList();
 
-        Log.Information(String.Format(Localizer.GetString("FoundXSectionsAndSecGrp"), sections.Count));
+        //Log.Information(String.Format(Localizer.GetString("FoundXSectionsAndSecGrp"), sections.Count));
 
         // Create the joplin root mdfile of the notebook
         WriteSectionNodeMdFile(notebook);
@@ -67,7 +67,7 @@ public class JoplinExportService : ExportServiceBase
         foreach (Section section in sections)
         {
             cmpt++;
-            Log.Information($"{Localizer.GetString("StartProcessingSectionX")} ({cmpt}/{sections.Count()}) :  {section.GetPath(_appSettings.MdMaxFileLength)}\\{section.Title}");
+            //Log.Information($"{Localizer.GetString("StartProcessingSectionX")} ({cmpt}/{sections.Count()}) :  {section.GetPath(_appSettings.MdMaxFileLength)}\\{section.Title}");
 
             WriteSectionNodeMdFile(section);
 
@@ -96,7 +96,7 @@ public class JoplinExportService : ExportServiceBase
     /// <param name="section"></param>
     private void ExportSectionPages(Section section, string pageNameFilter = "")
     {
-        Log.Debug($"Start exporting pages of section {section.Title}");
+        //Log.Debug($"Start exporting pages of section {section.Title}");
 
         // Get pages of the section and apply provided filter if any
         var pages = _oneNoteApp.FillSectionPages(section).Where(p => string.IsNullOrEmpty(pageNameFilter) || p.Title == pageNameFilter).ToList();
@@ -110,7 +110,7 @@ public class JoplinExportService : ExportServiceBase
                 MovePageHierarchyInADedicatedNotebook(page);
             }
 
-            Log.Information($"   {Localizer.GetString("Page")} {++cmpt}/{pages.Count} : {page.TitleWithPageLevelTabulation}");
+            //Log.Information($"   {Localizer.GetString("Page")} {++cmpt}/{pages.Count} : {page.TitleWithPageLevelTabulation}");
 
             ExportPage(page);
         }

@@ -50,7 +50,7 @@ public class ConverterService
         };
 
 
-        //Log.Debug($"{page.Id} : Start Pandoc");
+        ////Log.Debug($"{page.Id} : Start Pandoc");
 
         using (Process exeProcess = Process.Start(startInfo))
         {
@@ -58,11 +58,11 @@ public class ConverterService
 
             if(exeProcess.ExitCode == 0)
             {
-                //Log.Debug($"{page.Id} : Pandoc success");
+                ////Log.Debug($"{page.Id} : Pandoc success");
 
 
                 if (_appSettings.Debug)
-                    //Log.Debug($"Pandoc output: {exeProcess.StandardOutput.ReadToEnd()}");
+                    ////Log.Debug($"Pandoc output: {exeProcess.StandardOutput.ReadToEnd()}");
                 
                 File.Delete(inputFilePath);
 

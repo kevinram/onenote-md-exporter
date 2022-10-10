@@ -80,13 +80,13 @@ public class MdExportService : ExportServiceBase
         // Get all sections and section groups, or the one specified in parameter if any
         var sections = notebook.GetSections().Where(s => string.IsNullOrEmpty(sectionNameFilter) || s.Title == sectionNameFilter).ToList();
 
-        Log.Information(String.Format(Localizer.GetString("FoundXSections"), sections.Count));
+        //Log.Information(String.Format(Localizer.GetString("FoundXSections"), sections.Count));
 
         // Export each section
         int cmptSect = 0;
         foreach (Section section in sections)
         {
-            Log.Information($"{Localizer.GetString("StartProcessingSectionX")} ({++cmptSect}/{sections.Count()}) :  {section.GetPath(_appSettings.MdMaxFileLength)}\\{section.Title}");
+            //Log.Information($"{Localizer.GetString("StartProcessingSectionX")} ({++cmptSect}/{sections.Count()}) :  {section.GetPath(_appSettings.MdMaxFileLength)}\\{section.Title}");
 
             if (section.IsSectionGroup)
                 throw new InvalidOperationException("Cannot call ExportSection on section group with MdExport");
@@ -98,7 +98,7 @@ public class MdExportService : ExportServiceBase
 
             foreach (Page page in pages)
             {
-                Log.Information($"   {Localizer.GetString("Page")} {++cmptPage}/{pages.Count} : {page.TitleWithPageLevelTabulation}");
+                //Log.Information($"   {Localizer.GetString("Page")} {++cmptPage}/{pages.Count} : {page.TitleWithPageLevelTabulation}");
                 ExportPage(page);
             }
         }

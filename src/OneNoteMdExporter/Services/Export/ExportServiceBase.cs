@@ -100,7 +100,7 @@ public abstract class ExportServiceBase : IExportService
 
             PreparePageExport(page);
 
-            Log.Debug($"{page.OneNoteId}: start OneNote docx publish");
+            //Log.Debug($"{page.OneNoteId}: start OneNote docx publish");
 
             // Request OneNote to export the page into a DocX file
             try
@@ -114,14 +114,14 @@ public abstract class ExportServiceBase : IExportService
             catch (Exception e)
             {
 
-                Log.Debug(e.Message);
+                //Log.Debug(e.Message);
                 throw e;
             }
-            Log.Debug($"{page.OneNoteId}: docx");
+            //Log.Debug($"{page.OneNoteId}: docx");
 
             //_oneNoteApp.Publish(page.OneNoteId, Path.GetFullPath(docxFileTmpFile), PublishFormat.pfHTML);
-            //Log.Debug($"{page.OneNoteId}: pfHTML");
-            //Log.Debug($"{page.OneNoteId}: mhtlml");
+            ////Log.Debug($"{page.OneNoteId}: pfHTML");
+            ////Log.Debug($"{page.OneNoteId}: mhtlml");
 
             if (_appSettings.Debug || _appSettings.KeepOneNoteDocxFiles)
             {
@@ -182,8 +182,8 @@ public abstract class ExportServiceBase : IExportService
 
     private void LogError(Page p, Exception ex, string message)
     {
-        Log.Warning($"Page '{p.GetPageFileRelativePath(_appSettings.MdMaxFileLength)}': {message}");
-        Log.Debug(ex, ex.Message);
+        //Log.Warning($"Page '{p.GetPageFileRelativePath(_appSettings.MdMaxFileLength)}': {message}");
+        //Log.Debug(ex, ex.Message);
     }
 
     /// <summary>
