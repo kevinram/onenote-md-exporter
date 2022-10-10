@@ -1,1 +1,14 @@
 ﻿global using alxnbl.OneNoteMdExporter;
+global using global::System.IO;
+global using alxnbl.OneNoteMdExporter.Helpers;
+global using alxnbl.OneNoteMdExporter.Infrastructure;
+global using alxnbl.OneNoteMdExporter.Models;
+global using Microsoft.Office.Interop.OneNote;
+global using Serilog;
+global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Text;
+global using System.Runtime.InteropServices;
+global using System.Text.RegularExpressions;
+global using Application = Microsoft.Office.Interop.OneNote.Application;
