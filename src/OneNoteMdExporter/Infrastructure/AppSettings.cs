@@ -52,7 +52,7 @@ namespace alxnbl.OneNoteMdExporter.Infrastructure
         /// <summary>
         /// Name of the resource folder where attachemnts and image files are stored
         /// </summary>
-        public string ResourceFolderName { get; set; } = "assets";
+        public string ResourceFolderName { get; set; } = "assets2";
 
         /*
          * Markdown rendering Settings

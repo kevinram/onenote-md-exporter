@@ -61,7 +61,7 @@ namespace alxnbl.OneNoteMdExporter
 
             OneNoteApp = new OneNote.Application();
 
-            WelcomeScreen(opts);
+            //WelcomeScreen(opts);
 
             IList<Notebook> notebookToProcess;
 
@@ -87,7 +87,8 @@ namespace alxnbl.OneNoteMdExporter
             if (notebookToProcess.Count == 0)
                 return;
 
-            ExportFormat exportFormat = ExportFormatSelectionForm(opts.ExportFormat);
+            //ExportFormat exportFormat = ExportFormatSelectionForm(opts.ExportFormat);
+            ExportFormat exportFormat = ExportFormat.Markdown;
 
             if (exportFormat == ExportFormat.Undefined)
                 return;

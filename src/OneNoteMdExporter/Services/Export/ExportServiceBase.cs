@@ -115,9 +115,25 @@ namespace alxnbl.OneNoteMdExporter.Services.Export
                 Log.Debug($"{page.OneNoteId}: start OneNote docx publish");
 
                 // Request OneNote to export the page into a DocX file
-                _oneNoteApp.Publish(page.OneNoteId, Path.GetFullPath(docxFileTmpFile), PublishFormat.pfWord);
+                try
+                {
 
-                Log.Debug($"{page.OneNoteId}: success");
+                    docxFileTmpFile = Path.Combine(GetTmpFolder(page), page.Id + ".mht");
+                    //_oneNoteApp.Publish(page.OneNoteId, Path.GetFullPath(docxFileTmpFile), PublishFormat.pfWord);
+                    _oneNoteApp.Publish(page.OneNoteId, Path.GetFullPath(docxFileTmpFile), PublishFormat.pfMHTML);
+
+                }
+                catch (Exception e)
+                {
+
+                    Log.Debug(e.Message);
+                    throw e;
+                }
+                Log.Debug($"{page.OneNoteId}: docx");
+
+                //_oneNoteApp.Publish(page.OneNoteId, Path.GetFullPath(docxFileTmpFile), PublishFormat.pfHTML);
+                //Log.Debug($"{page.OneNoteId}: pfHTML");
+                //Log.Debug($"{page.OneNoteId}: mhtlml");
 
                 if (_appSettings.Debug || _appSettings.KeepOneNoteDocxFiles)
                 {

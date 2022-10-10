@@ -23,8 +23,9 @@ namespace alxnbl.OneNoteMdExporter.Services.Export
             var pagePath = Path.GetDirectoryName(GetPageMdFilePath(page));
             var resourceFolderName = _appSettings.ResourceFolderName;
             var result = "";
+            var resourceFolderLocation = _appSettings.ResourceFolderLocation;
 
-            if (_appSettings.ResourceFolderLocation == ResourceFolderLocationEnum.RootFolder)
+            if (resourceFolderLocation == ResourceFolderLocationEnum.RootFolder)
                 result = Path.Combine(notebookPath, fldName);
             else
                 result = Path.Combine(pagePath, resourceFolderName);
