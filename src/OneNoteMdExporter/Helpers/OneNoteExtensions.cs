@@ -1,11 +1,11 @@
 ﻿using Microsoft.Office.Interop.OneNote;
-using alxnbl.OneNoteMdExporter.Models;
+using a.onexport.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace alxnbl.OneNoteMdExporter.Helpers
+namespace a.onexport.Helpers
 {
     public static class OneNoteExtensions
     {

@@ -1,7 +1,7 @@
-﻿using alxnbl.OneNoteMdExporter.Models;
+﻿using a.onexport.Models;
 using Microsoft.Extensions.Configuration;
 
-namespace alxnbl.OneNoteMdExporter.Infrastructure
+namespace a.onexport.Infrastructure
 {
     public class AppSettings
     {

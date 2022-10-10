@@ -1,6 +1,6 @@
-﻿using alxnbl.OneNoteMdExporter.Helpers;
-using alxnbl.OneNoteMdExporter.Infrastructure;
-using alxnbl.OneNoteMdExporter.Models;
+﻿using a.onexport.Helpers;
+using a.onexport.Infrastructure;
+using a.onexport.Models;
 using CommandLine;
 using OneNote = Microsoft.Office.Interop.OneNote;
 using Serilog;
@@ -12,7 +12,7 @@ using System.Linq;
 using System.Reflection;
 using System.Diagnostics;
 
-namespace alxnbl.OneNoteMdExporter;
+namespace a.onexport;
 
 public class Program
 {

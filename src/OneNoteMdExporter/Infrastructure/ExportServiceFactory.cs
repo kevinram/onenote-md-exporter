@@ -1,10 +1,10 @@
-﻿using alxnbl.OneNoteMdExporter.Models;
-using alxnbl.OneNoteMdExporter.Services;
-using alxnbl.OneNoteMdExporter.Services.Export;
+﻿using a.onexport.Models;
+using a.onexport.Services;
+using a.onexport.Services.Export;
 using Microsoft.Office.Interop.OneNote;
 using System;
 
-namespace alxnbl.OneNoteMdExporter.Infrastructure
+namespace a.onexport.Infrastructure
 {
     public static class ExportServiceFactory
     {

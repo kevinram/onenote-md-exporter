@@ -1,4 +1,4 @@
-﻿namespace alxnbl.OneNoteMdExporter.Services.Export;
+﻿namespace a.onexport.Services.Export;
 
 public interface IExportService
 {

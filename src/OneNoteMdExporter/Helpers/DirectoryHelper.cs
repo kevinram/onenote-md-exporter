@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace alxnbl.OneNoteMdExporter.Helpers
+namespace a.onexport.Helpers
 {
     public static class DirectoryHelper
     {

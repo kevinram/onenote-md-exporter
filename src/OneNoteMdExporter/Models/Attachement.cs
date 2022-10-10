@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace alxnbl.OneNoteMdExporter.Models
+namespace a.onexport.Models
 {
     public class Attachement
     {

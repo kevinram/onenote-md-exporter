@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace alxnbl.OneNoteMdExporter.Models
+namespace a.onexport.Models
 {
     public class Notebook : Node
     {

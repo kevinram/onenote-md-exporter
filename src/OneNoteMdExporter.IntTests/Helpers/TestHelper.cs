@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 
-namespace alxnbl.OneNoteMdExporter.IntTests.Helpers
+namespace a.onexport.IntTests.Helpers
 {
     public static class TestHelper
     {

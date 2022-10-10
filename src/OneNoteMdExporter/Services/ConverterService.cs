@@ -1,12 +1,12 @@
-﻿using alxnbl.OneNoteMdExporter.Infrastructure;
-using alxnbl.OneNoteMdExporter.Models;
+﻿using a.onexport.Infrastructure;
+using a.onexport.Models;
 using Serilog;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace alxnbl.OneNoteMdExporter.Services;
+namespace a.onexport.Services;
 
 public class ConverterService
 {

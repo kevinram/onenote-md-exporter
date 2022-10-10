@@ -1,6 +1,6 @@
-﻿using alxnbl.OneNoteMdExporter.Helpers;
-using alxnbl.OneNoteMdExporter.Infrastructure;
-using alxnbl.OneNoteMdExporter.Models;
+﻿using a.onexport.Helpers;
+using a.onexport.Infrastructure;
+using a.onexport.Models;
 using Microsoft.Office.Interop.OneNote;
 using Serilog;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace alxnbl.OneNoteMdExporter.Services.Export
+namespace a.onexport.Services.Export
 {
     /// <summary>
     /// Markdown exporter Service

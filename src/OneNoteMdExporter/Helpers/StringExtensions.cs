@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace alxnbl.OneNoteMdExporter.Helpers
+namespace a.onexport.Helpers
 {
     public static class StringExtensions
     {

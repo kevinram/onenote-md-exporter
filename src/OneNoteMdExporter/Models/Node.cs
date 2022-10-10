@@ -1,10 +1,10 @@
-﻿using alxnbl.OneNoteMdExporter.Helpers;
+﻿using a.onexport.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace alxnbl.OneNoteMdExporter.Models
+namespace a.onexport.Models
 {
     public class Node
     {

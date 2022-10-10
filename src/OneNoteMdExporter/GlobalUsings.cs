@@ -1,8 +1,8 @@
-﻿global using alxnbl.OneNoteMdExporter;
+﻿global using a.onexport;
 global using global::System.IO;
-global using alxnbl.OneNoteMdExporter.Helpers;
-global using alxnbl.OneNoteMdExporter.Infrastructure;
-global using alxnbl.OneNoteMdExporter.Models;
+global using a.onexport.Helpers;
+global using a.onexport.Infrastructure;
+global using a.onexport.Models;
 global using Microsoft.Office.Interop.OneNote;
 global using Serilog;
 global using System;

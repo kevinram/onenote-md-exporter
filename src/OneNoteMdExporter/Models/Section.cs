@@ -1,4 +1,4 @@
-﻿namespace alxnbl.OneNoteMdExporter.Models
+﻿namespace a.onexport.Models
 {
     public class Section : Node
     {

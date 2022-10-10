@@ -3,7 +3,7 @@ using System;
 using System.Globalization;
 using System.IO;
 
-namespace alxnbl.OneNoteMdExporter.Infrastructure
+namespace a.onexport.Infrastructure
 {
     public static class Localizer
     {

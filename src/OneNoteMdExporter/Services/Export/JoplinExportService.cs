@@ -1,5 +1,5 @@
 ﻿
-namespace alxnbl.OneNoteMdExporter.Services.Export;
+namespace a.onexport.Services.Export;
 
 /// <summary>
 /// Joplin exporter service

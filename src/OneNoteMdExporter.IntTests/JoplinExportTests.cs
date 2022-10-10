@@ -1,10 +1,10 @@
-using alxnbl.OneNoteMdExporter.IntTests.Helpers;
+using a.onexport.IntTests.Helpers;
 using NUnit.Framework;
 using System;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace alxnbl.OneNoteMdExporter.IntTests
+namespace a.onexport.IntTests
 {
     public class JoplinExportTests : ExportTests
     {
