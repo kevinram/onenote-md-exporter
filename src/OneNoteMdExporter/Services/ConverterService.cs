@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
-using Serilog;
+//using Serilog;
+using Log = System.Diagnostics.Debug;
 
 namespace a.onexport.Services;
 
@@ -49,7 +50,7 @@ public class ConverterService
         };
 
 
-        Log.Debug($"{page.Id} : Start Pandoc");
+        //Log.Debug($"{page.Id} : Start Pandoc");
 
         using (Process exeProcess = Process.Start(startInfo))
         {
@@ -57,11 +58,11 @@ public class ConverterService
 
             if(exeProcess.ExitCode == 0)
             {
-                Log.Debug($"{page.Id} : Pandoc success");
+                //Log.Debug($"{page.Id} : Pandoc success");
 
 
                 if (_appSettings.Debug)
-                    Log.Debug($"Pandoc output: {exeProcess.StandardOutput.ReadToEnd()}");
+                    //Log.Debug($"Pandoc output: {exeProcess.StandardOutput.ReadToEnd()}");
                 
                 File.Delete(inputFilePath);
 
@@ -71,9 +72,9 @@ public class ConverterService
             }
             else
             {
-                Log.Error($"{page.Id} : Pandoc error");
+                //Log.Error($"{page.Id} : Pandoc error");
                 var pandocError = exeProcess.StandardError.ReadToEnd();
-                Log.Error("Pandoc error output: {0}", pandocError);
+                //Log.Error("Pandoc error output: {0}", pandocError);
 
                 throw new Exception("Error during PanDoc execution");
             }
