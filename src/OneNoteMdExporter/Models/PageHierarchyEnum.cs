@@ -1,9 +1,8 @@
-﻿namespace a.onexport.Models
+﻿namespace a.onexport.Models;
+
+public enum PageHierarchyEnum
 {
-    public enum PageHierarchyEnum
-    {
-        IgnoreHierarchy = 0,
-        HiearchyAsFolderTree = 1,
-        HiearchyAsPageTitlePrefix = 2,
-    }
+    IgnoreHierarchy = 0,
+    HiearchyAsFolderTree = 1,
+    HiearchyAsPageTitlePrefix = 2,
 }

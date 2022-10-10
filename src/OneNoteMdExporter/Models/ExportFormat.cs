@@ -1,9 +1,8 @@
-﻿namespace a.onexport.Models
+﻿namespace a.onexport.Models;
+
+public enum ExportFormat
 {
-    public enum ExportFormat
-    {
-        Undefined = 0,
-        Markdown = 1,
-        JoplinMdFolder = 2
-    }
+    Undefined = 0,
+    Markdown = 1,
+    JoplinMdFolder = 2
 }

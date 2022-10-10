@@ -1,8 +1,7 @@
-﻿namespace a.onexport.Models
+﻿namespace a.onexport.Models;
+
+public enum ItemType
 {
-    public enum ItemType
-    {
-        Image = 1,
-        File = 2
-    }
+    Image = 1,
+    File = 2
 }

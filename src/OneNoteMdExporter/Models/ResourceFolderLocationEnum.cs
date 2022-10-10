@@ -1,8 +1,7 @@
-﻿namespace a.onexport.Models
+﻿namespace a.onexport.Models;
+
+public enum ResourceFolderLocationEnum
 {
-    public enum ResourceFolderLocationEnum
-    {
-        RootFolder = 1,
-        PageParentFolder = 2,
-    }
+    RootFolder = 1,
+    PageParentFolder = 2,
 }
