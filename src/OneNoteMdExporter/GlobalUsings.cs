@@ -1,5 +1,4 @@
-﻿global using a.onexport;
-global using global::System.IO;
+﻿global using System.IO;
 global using a.onexport.Helpers;
 global using a.onexport.Infrastructure;
 global using a.onexport.Models;
@@ -13,5 +12,5 @@ global using System.Text;
 global using System.Runtime.InteropServices;
 global using System.Text.RegularExpressions;
 global using Application = Microsoft.Office.Interop.OneNote.Application;
-global using Newtonsoft.Json.Linq;
+//global using Newtonsoft.Json.Linq;
 global using System.Globalization;

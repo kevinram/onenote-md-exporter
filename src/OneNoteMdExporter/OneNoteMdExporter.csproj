@@ -13,7 +13,7 @@
     <Company />
     <Product />
     <AssemblyName>OneNoteMdExporter</AssemblyName>
-    <RootNamespace>alxnbl.OneNoteMdExporter</RootNamespace>
+    <RootNamespace>a.onexport</RootNamespace>
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
 
