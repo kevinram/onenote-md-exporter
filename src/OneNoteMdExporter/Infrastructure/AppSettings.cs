@@ -1,4 +1,6 @@
-﻿
+﻿using Microsoft.Extensions.Configuration;
+
+//using Microsoft.Extensions.Configuration;
 namespace a.onexport.Infrastructure;
 
 public class AppSettings
