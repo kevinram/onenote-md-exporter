@@ -7,6 +7,13 @@ namespace a.onexport.Models
 {
     public class Page : Node
     {
+        public Page(Section parent) : base(parent)
+        {
+        }
+
+        public Page(Node parent) : base(parent)
+        {
+        }
         public int PageLevel { get; set; }
 
         private Page _parentPage { get; set; }
@@ -36,15 +43,12 @@ namespace a.onexport.Models
         public string TitleWithNoInvalidChars(int maxLength) 
             => Title.RemoveInvalidFileNameChars().Left(maxLength);
 
-        public IList<Attachement> Attachements { get; set; } = new List<Attachement>();
-        public IList<Attachement> ImageAttachements { get => Attachements.Where(a => a.Type == AttachementType.Image).ToList(); }
-        public IList<Attachement> FileAttachements { get => Attachements.Where(a => a.Type == AttachementType.File).ToList(); }
+        public IList<Item> Attachements { get; set; } = new List<Item>();
+        public IList<Item> ImageAttachements { get => Attachements.Where(a => a.Type == ItemType.Image).ToList(); }
+        public IList<Item> FileAttachements { get => Attachements.Where(a => a.Type == ItemType.File).ToList(); }
 
         public string Author { get; internal set; }
 
-        public Page(Section parent) : base(parent)
-        {
-        }
 
         /// <summary>
         /// Override page md file path in case of multiple page with the same name

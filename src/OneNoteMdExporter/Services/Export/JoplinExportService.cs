@@ -22,10 +22,10 @@ public class JoplinExportService : ExportServiceBase
     /// <param name="attachId">Id of the attachment</param>
     /// <param name="oneNoteFilePath">Original filepath of the file in OneNote</param>
     /// <returns></returns>
-    protected override string GetAttachmentFilePath(Attachement attachement)
+    protected override string GetAttachmentFilePath(Item attachement)
         => Path.Combine(GetResourceFolderPath(attachement.ParentPage), attachement.Id + Path.GetExtension(attachement.FriendlyFileName));
 
-    protected override string GetAttachmentMdReference(Attachement attachement)
+    protected override string GetAttachmentMdReference(Item attachement)
         => $":/{attachement.Id}";
 
     /// <summary>
@@ -141,7 +141,7 @@ public class JoplinExportService : ExportServiceBase
         }
     }
 
-    private string GetJoplinAttachmentMetadata(Attachement attach)
+    private string GetJoplinAttachmentMetadata(Item attach)
     {
 
         var exportFilePath = GetAttachmentFilePath(attach);
@@ -249,7 +249,7 @@ public class JoplinExportService : ExportServiceBase
         File.WriteAllText(GetPageMdFilePath(page), pageMd);
     }
 
-    protected override void FinalizeExportPageAttachemnts(Page page, Attachement attachment)
+    protected override void FinalizeExportPageAttachemnts(Page page, Item attachment)
     {
         // Create joplin md file for the attachment
         File.WriteAllText(GetJoplinAttachmentMdFilePath(page, attachment.Id), GetJoplinAttachmentMetadata(attachment));

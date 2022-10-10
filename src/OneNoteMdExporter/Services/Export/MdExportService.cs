@@ -11,9 +11,6 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace a.onexport.Services.Export
 {
-    /// <summary>
-    /// Markdown exporter Service
-    /// </summary>
     public class MdExportService : ExportServiceBase
     {
         protected override string GetResourceFolderPath(Page page)
@@ -62,7 +59,7 @@ namespace a.onexport.Services.Export
             }
         }
 
-        protected override string GetAttachmentFilePath(Attachement attachement)
+        protected override string GetAttachmentFilePath(Item attachement)
         {
             var resourcePath = GetResourceFolderPath(attachement.ParentPage);
             var friendlyName = attachement.FriendlyFileName.RemoveMdReferenceInvalidChars();
@@ -78,7 +75,7 @@ namespace a.onexport.Services.Export
         /// </summary>
         /// <param name="attachement"></param>
         /// <returns></returns>
-        protected override string GetAttachmentMdReference(Attachement attachement)
+        protected override string GetAttachmentMdReference(Item attachement)
             => Path.GetRelativePath(Path.GetDirectoryName(GetPageMdFilePath(attachement.ParentPage)), GetAttachmentFilePath(attachement)).Replace("\\", "/");
 
         public MdExportService(AppSettings appSettings, Application oneNoteApp, ConverterService converterService) : base(appSettings, oneNoteApp, converterService)
@@ -120,7 +117,7 @@ namespace a.onexport.Services.Export
             File.WriteAllText(GetPageMdFilePath(page), pageMd);
         }
 
-        protected override void FinalizeExportPageAttachemnts(Page page, Attachement attachment)
+        protected override void FinalizeExportPageAttachemnts(Page page, Item attachment)
         {
             return; // No markdown file generated for attachments
         }

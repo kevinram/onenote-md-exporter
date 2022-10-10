@@ -32,14 +32,14 @@ public abstract class ExportServiceBase : IExportService
     /// <param name="attachId">Id of the attachment</param>
     /// <param name="oneNoteFilePath">Original filepath of the file in OneNote</param>
     /// <returns></returns>
-    protected abstract string GetAttachmentFilePath(Attachement attachement);
+    protected abstract string GetAttachmentFilePath(Item attachement);
 
     /// <summary>
     /// Get the md reference to the attachment
     /// </summary>
     /// <param name="attachement"></param>
     /// <returns></returns>
-    protected abstract string GetAttachmentMdReference(Attachement attachement);
+    protected abstract string GetAttachmentMdReference(Item attachement);
 
     protected abstract string GetResourceFolderPath(Page node);
 
@@ -201,9 +201,9 @@ public abstract class ExportServiceBase : IExportService
     /// <param name="pageMdFileContent">Markdown content of the page</param>
     private void ExportPageAttachments(Page page, ref string pageMdFileContent)
     {
-        foreach (Attachement attach in page.Attachements)
+        foreach (Item attach in page.Attachements)
         {
-            if (attach.Type == AttachementType.File)
+            if (attach.Type == ItemType.File)
             {
                 EnsureAttachmentFileIsNotUsed(page, attach);
 
@@ -229,7 +229,7 @@ public abstract class ExportServiceBase : IExportService
     /// </summary>
     /// <param name="page">The page</param>
     /// <param name="attachment">The attachment</param>
-    protected abstract void FinalizeExportPageAttachemnts(Page page, Attachement attachment);
+    protected abstract void FinalizeExportPageAttachemnts(Page page, Item attachment);
 
 
     /// <summary>
@@ -237,7 +237,7 @@ public abstract class ExportServiceBase : IExportService
     /// </summary>
     /// <param name="pageMdFileContent"></param>
     /// <param name="attach"></param>
-    private void InsertPageMdAttachmentReference(ref string pageMdFileContent, Attachement attach, Func<Attachement, string> getAttachMdReferenceMethod)
+    private void InsertPageMdAttachmentReference(ref string pageMdFileContent, Item attach, Func<Item, string> getAttachMdReferenceMethod)
     {
         var pageMdFileContentModified = Regex.Replace(pageMdFileContent, "(\\\\<){2}(?<fileName>.*)(>\\\\>)", delegate (Match match)
         {
@@ -273,15 +273,15 @@ public abstract class ExportServiceBase : IExportService
 
         var panDocHtmlImgTagPath = Path.GetFullPath(imgMatch.Groups["src"].Value);
 
-        Attachement imgAttach = page.ImageAttachements.Where(img => PathExtensions.PathEquals(img.ActualSourceFilePath, panDocHtmlImgTagPath)).FirstOrDefault();
+        Item imgAttach = page.ImageAttachements.Where(img => PathExtensions.PathEquals(img.ActualSourceFilePath, panDocHtmlImgTagPath)).FirstOrDefault();
 
         // Only add a new attachment if this is the first time the image is referenced in the page
         if (imgAttach == null)
         {
             // Add a new attachmeent to current page
-            imgAttach = new Attachement(page)
+            imgAttach = new Item(page)
             {
-                Type = AttachementType.Image,
+                Type = ItemType.Image,
             };
 
             imgAttach.ActualSourceFilePath = Path.GetFullPath(panDocHtmlImgTagPath);
@@ -323,15 +323,15 @@ public abstract class ExportServiceBase : IExportService
 
             var panDocHtmlImgTagPath = Path.GetFullPath(imgMatch.Groups["src"].Value);
 
-            Attachement imgAttach = page.ImageAttachements.Where(img => PathExtensions.PathEquals(img.ActualSourceFilePath, panDocHtmlImgTagPath)).FirstOrDefault();
+            Item imgAttach = page.ImageAttachements.Where(img => PathExtensions.PathEquals(img.ActualSourceFilePath, panDocHtmlImgTagPath)).FirstOrDefault();
 
             // Only add a new attachment if this is the first time the image is referenced in the page
             if (imgAttach == null)
             {
                 // Add a new attachmeent to current page
-                imgAttach = new Attachement(page)
+                imgAttach = new Item(page)
                 {
-                    Type = AttachementType.Image,
+                    Type = ItemType.Image,
                 };
 
                 imgAttach.ActualSourceFilePath = Path.GetFullPath(panDocHtmlImgTagPath);
@@ -373,7 +373,7 @@ public abstract class ExportServiceBase : IExportService
         }
     }
 
-    private void EnsureAttachmentFileIsNotUsed(Page page, Attachement attach)
+    private void EnsureAttachmentFileIsNotUsed(Page page, Item attach)
     {
         var notUseFileNameFound = false;
         var cmpt = 0;

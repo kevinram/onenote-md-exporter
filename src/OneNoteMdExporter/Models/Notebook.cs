@@ -24,9 +24,9 @@ namespace a.onexport.Models
         /// </summary>
         public string ExportFolder { get; set; }
 
-        public IList<Attachement> GetAllAttachments()
+        public IList<Item> GetAllAttachments()
         {
-            var attachments = new List<Attachement>();
+            var attachments = new List<Item>();
 
             foreach(Section s in GetSections(false))
             {

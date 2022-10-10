@@ -3,11 +3,11 @@ using System.IO;
 
 namespace a.onexport.Models
 {
-    public class Attachement
+    public class Item
     {
         public string Id { get; set; }
 
-        public AttachementType Type {get; set;}
+        public ItemType Type {get; set;}
 
         public string FriendlyFileName { 
             get { return OneNotePreferredFileName ?? Path.GetFileName(OriginalUserFilePath); }
@@ -39,7 +39,7 @@ namespace a.onexport.Models
 
         public Page ParentPage { get; set; }
 
-        public Attachement(Page parent)
+        public Item(Page parent)
         {
             ParentPage = parent;
             Id = Guid.NewGuid().ToString().Replace("-", string.Empty);

@@ -194,12 +194,12 @@ namespace a.onexport.Helpers
         {
             foreach (var xmlInsertedFile in xmlPageContent.Descendants(ns + "InsertedFile"))
             {
-                var fileAttachment = new Attachement(page)
+                var fileAttachment = new Item(page)
                 {
                     ActualSourceFilePath = xmlInsertedFile.Attribute("pathCache")?.Value,
                     OriginalUserFilePath = xmlInsertedFile.Attribute("pathSource")?.Value,
                     OneNotePreferredFileName = xmlInsertedFile.Attribute("preferredName")?.Value,
-                    Type = AttachementType.File
+                    Type = ItemType.File
                 };
 
                 if (fileAttachment.ActualSourceFilePath != null)
